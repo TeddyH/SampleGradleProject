@@ -1,0 +1,18 @@
+spring:
+    application:
+        name:SampleGradleProject
+    datasource :
+        url:
+        username:
+        password:
+        driverClassName: com.mysql.jdbc.Driver
+        maxIdle: 20
+        maxActive: 400
+        maxWait: 10000
+        validationQuery: SELECT 1 FROM dual
+
+mybatis:
+    url:
+    driverClassName: com.mysql.jdbc.Driver
+    userName:
+    password:
