@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Application {
-//        extends SpringBootServletInitializer {
+//    extends SpringBootServletInitializer {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 

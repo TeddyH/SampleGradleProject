@@ -3,6 +3,7 @@ package hello.controller;
 import hello.domain.BrainpubLogin;
 import hello.repository.BrainpubRepository;
 import hello.repository.mybatis.mapper.BrainpubMapper;
+import hello.repository.mybatis.mapper.TeddyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +15,7 @@ import java.util.List;
  */
 
 @RestController
-public class HelloController {
+public class BrainpubController {
 
     @Autowired
     private BrainpubRepository brainpubRepository;
@@ -22,8 +23,12 @@ public class HelloController {
     @Autowired
     private BrainpubMapper brainpubMapper;
 
+    @Autowired
+    private TeddyMapper teddyMapper;
+
     @RequestMapping("/")
     public String index() {
+
         return "Greetings from Spring Boots!";
     }
 
@@ -36,5 +41,10 @@ public class HelloController {
     @RequestMapping("/list2")
     public List<BrainpubLogin> list2() {
         return brainpubMapper.listDoodleLogins();
+    }
+
+    @RequestMapping("/listmapper")
+    public BrainpubLogin listmappper() {
+        return teddyMapper.selectDoodleLogin("박하");
     }
 }

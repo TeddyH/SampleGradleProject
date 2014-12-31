@@ -1,4 +1,4 @@
-spring_boot_sample
+SampleGradleProject
 ==================
 
-spring_boot_sample
+spring boot + Mybatis + spring jdbc template + yaml

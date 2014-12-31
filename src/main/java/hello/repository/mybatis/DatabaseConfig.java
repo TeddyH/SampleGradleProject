@@ -1,4 +1,4 @@
-package hello;
+package hello.repository.mybatis;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.PathResource;
+import org.springframework.core.io.Resource;
 
 import javax.sql.DataSource;
 
@@ -32,6 +34,15 @@ public class DatabaseConfig {
         dataSource.setUsername(mybatisProperties.getUserName());
         dataSource.setPassword(mybatisProperties.getPassword());
         dataSource.setUrl(mybatisProperties.getUrl());
+        dataSource.setValidationQuery("/* ping */ SELECT 1");
+//        dataSource.setMaxIdle(3);
+//        dataSource.setTestOnBorrow(false);
+//        dataSource.setTestOnReturn(false);
+//        dataSource.setTestWhileIdle(true);
+//        dataSource.setTimeBetweenEvictionRunsMillis(60000);
+//        dataSource.setNumTestsPerEvictionRun(5);
+//        dataSource.setMinEvictableIdleTimeMillis(-1);
+
         return dataSource;
     }
 
@@ -45,6 +56,14 @@ public class DatabaseConfig {
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         final SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource);
+
+//        sessionFactoryBean.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
+        sessionFactoryBean.setFailFast(true);
+        Resource mapperResource = new PathResource("classpath:mapper/**/*.xml") {
+        };
+        sessionFactoryBean.setMapperLocations(new Resource[]{mapperResource});
+//        sessionFactoryBean.setTypeHandlersPackage("org.horiga.study.mybatis.typehandler");
+
         return sessionFactoryBean.getObject();
     }
 }
