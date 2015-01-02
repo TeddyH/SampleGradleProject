@@ -9,5 +9,9 @@ public interface TeddyMapper {
 
     public BrainpubLogin selectDoodleLogin(String name);
 
+    public int insertLogin(BrainpubLogin brainpubLogin);
+
+    public int updateLogin(BrainpubLogin brainpubLogin);
+
 
 }

@@ -9,4 +9,25 @@
         WHERE name = #{name}
     </select>
 
+    <insert id="insertLogin" parameterType="hello.domain.BrainpubLogin">
+        INSERT INTO doodle_login
+            (id, name, thumb, thumb_sec, ptr)
+        VALUES
+            (#{id}, #{name}, #{thumb}, #{thumb_sec}, #{ptr} )
+    </insert>
+
+    <update id="updateLogin" parameterType="hello.domain.BrainpubLogin">
+        UPDATE doodle_login
+        SET
+            name = #{name},
+            thumb = #{thumb},
+            thumb_sec = #{thumb_sec},
+            ptr= #{ptr}
+        WHERE num = #{num}
+    </update>
+
+    <delete id="deleteLogin" parameterType="string">
+        DELETE FROM doodle_login
+        WHERE num = #{num}
+    </delete>
 </mapper>

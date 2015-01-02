@@ -9,8 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.PathResource;
-import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
 
@@ -19,6 +18,7 @@ import javax.sql.DataSource;
  * Created by Administrator on 2014-12-29.
  */
 @Configuration
+//@EnableTransactionManagement
 @MapperScan(basePackages = "hello.repository.mybatis.mapper"/*, sqlSessionFactoryRef = "mySessionFactory"*/)
 public class DatabaseConfig {
 
@@ -59,11 +59,14 @@ public class DatabaseConfig {
 
 //        sessionFactoryBean.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
         sessionFactoryBean.setFailFast(true);
-        Resource mapperResource = new PathResource("classpath:mapper/**/*.xml") {
-        };
-        sessionFactoryBean.setMapperLocations(new Resource[]{mapperResource});
+        sessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
 //        sessionFactoryBean.setTypeHandlersPackage("org.horiga.study.mybatis.typehandler");
 
         return sessionFactoryBean.getObject();
     }
+
+//    @Bean
+//    public PlatformTransactionManager transactionManager() {
+//        return new DataSourceTransactionManager(dataSource());
+//    }
 }
