@@ -1,8 +1,13 @@
+ext {
+    springBootVersion = "1.2.0.RELEASE"
+}
+
 buildscript {
     repositories {
-        maven { url "http://repo.spring.io/libs-release" }
+//        jcenter()
         mavenLocal()
         mavenCentral()
+        maven { url "http://repo.spring.io/libs-release" }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.0.RELEASE")
@@ -10,15 +15,34 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
+//apply plugin: 'eclipse'
+//apply plugin: 'war'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
+//apply plugin: 'application'
 
-sourceCompatibility = 1.8
+mainClassName = 'hello.Application'
+sourceCompatibility = 1.7
+version = '0.0.1'
+
+jar {
+    manifest {
+        attributes (
+                'Implementation-Title' : 'Sample Gradle Project',
+                'Implementation-Version': version,
+                'Main-Class' : mainClassName )
+    }
+    baseName = project.name
+//    dependsOn configurations.runtime
+//    from {
+//        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+//    }
+}
 
 repositories {
     mavenLocal()
     mavenCentral()
+//    jcenter()
     maven { url "http://repo.spring.io/libs-release" }
 }
 
@@ -30,5 +54,9 @@ dependencies {
     compile("org.mybatis:mybatis-spring:1.2.2")
     compile("org.apache.commons:commons-dbcp2:2.0.1")
     compile("commons-lang:commons-lang:2.6")
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = "2.2.1"
 }
