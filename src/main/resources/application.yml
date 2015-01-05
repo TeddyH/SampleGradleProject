@@ -1,18 +1,21 @@
+# ===================================================================
+# COMMON SPRING BOOT PROPERTIES
+#
+# This sample file is provided as a guideline. Do NOT copy it in its
+# entirety to your own application.               ^^^
+# ===================================================================
+
+# ----------------------------------------
+# CORE PROPERTIES
+# ----------------------------------------
+
+# IDENTITY (ContextIdApplicationContextInitializer)
 spring:
     application:
         name:SampleGradleProject
-    datasource :
-        url:
-        username:
-        password:
-        driverClassName: com.mysql.jdbc.Driver
-        maxIdle: 20
-        maxActive: 400
-        maxWait: 10000
-        validationQuery: SELECT 1 FROM dual
 
 mybatis:
-    url:
+    url: jdbc:
     driverClassName: com.mysql.jdbc.Driver
     userName:
     password:
