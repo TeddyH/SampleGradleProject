@@ -22,7 +22,7 @@ public class Application {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-    //    @Override
+//    @Override
 //    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 //        return application.sources(Application.class);
 //    }

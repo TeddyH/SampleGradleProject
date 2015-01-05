@@ -19,7 +19,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 //@EnableTransactionManagement
-@MapperScan(basePackages = "hello.repository.mybatis.mapper"/*, sqlSessionFactoryRef = "mySessionFactory"*/)
+@MapperScan(basePackages = "hello.repository.mybatis.mapper")
 public class DatabaseConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(DatabaseConfig.class);
@@ -35,6 +35,7 @@ public class DatabaseConfig {
         dataSource.setPassword(mybatisProperties.getPassword());
         dataSource.setUrl(mybatisProperties.getUrl());
         dataSource.setValidationQuery("/* ping */ SELECT 1");
+        // optional
 //        dataSource.setMaxIdle(3);
 //        dataSource.setTestOnBorrow(false);
 //        dataSource.setTestOnReturn(false);
@@ -57,14 +58,16 @@ public class DatabaseConfig {
         final SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource);
 
+        // TODO : teddy : mybatis-config.xml 을 사용 하는 경우
 //        sessionFactoryBean.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
         sessionFactoryBean.setFailFast(true);
         sessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
-//        sessionFactoryBean.setTypeHandlersPackage("org.horiga.study.mybatis.typehandler");
+//        sessionFactoryBean.setTypeHandlersPackage("hello.domain.*");
 
         return sessionFactoryBean.getObject();
     }
 
+    // TODO : teddy : transactionManager 를 선언 하지 않아도 transaction 처리가 되더라..
 //    @Bean
 //    public PlatformTransactionManager transactionManager() {
 //        return new DataSourceTransactionManager(dataSource());

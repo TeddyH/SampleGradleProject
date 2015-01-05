@@ -1,9 +1,6 @@
 package hello.controller;
 
 import hello.domain.BrainpubLogin;
-import hello.repository.BrainpubRepository;
-import hello.repository.mybatis.mapper.BrainpubMapper;
-import hello.repository.mybatis.mapper.TeddyMapper;
 import hello.service.BrainpubService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,15 +20,6 @@ public class BrainpubController {
     private static final Logger logger = LoggerFactory.getLogger(BrainpubController.class);
 
     @Autowired
-    private BrainpubRepository brainpubRepository;
-
-    @Autowired
-    private BrainpubMapper brainpubMapper;
-
-    @Autowired
-    private TeddyMapper teddyMapper;
-
-    @Autowired
     private BrainpubService brainpubService;
 
     @RequestMapping("/")
@@ -42,18 +30,32 @@ public class BrainpubController {
 
     @RequestMapping("/list")
     public List<BrainpubLogin> list() {
-
-        return brainpubRepository.listDoodleLogins();
+        try {
+            return brainpubService.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @RequestMapping("/list2")
     public List<BrainpubLogin> list2() {
-        return brainpubMapper.listDoodleLogins();
+        try {
+            return brainpubService.list2();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @RequestMapping("/listmapper")
     public BrainpubLogin listmappper() {
-        return teddyMapper.selectDoodleLogin("박하");
+        try {
+            return brainpubService.listMapper("박하");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @RequestMapping("/tran")
