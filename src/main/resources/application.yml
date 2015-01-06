@@ -15,7 +15,7 @@ spring:
         name:SampleGradleProject
 
 mybatis:
-    url: jdbc:
+    url:
     driverClassName: com.mysql.jdbc.Driver
     userName:
     password:
